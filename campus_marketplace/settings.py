@@ -30,8 +30,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'cloudinary_storage',
-    'cloudinary',
+    
     'django.contrib.staticfiles',
+    'cloudinary',
     
     
     # Custom Apps
@@ -116,6 +117,8 @@ STATIC_ROOT = BASE_DIR / 'staticfiles' # Location for "collectstatic"
 STATICFILES_DIRS = [
     BASE_DIR / "static", # Location of your custom CSS
 ]
+
+WHITENOISE_MANIFEST_STRICT = False
 
 # Media files (User uploads)
 MEDIA_URL = '/media/'
