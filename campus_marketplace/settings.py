@@ -148,15 +148,12 @@ CLOUDINARY_STORAGE = {
 # campus_marketplace/settings.py
 
 # Keep this False so it doesn't crash again
-WHITENOISE_MANIFEST_STRICT = False
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
+        # This backend compresses files (fast) but DOES NOT rename them (no missing file errors)
         "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
