@@ -13,7 +13,7 @@ class Listings(models.Model):
     ]
     category = models.CharField(max_length=10, choices=CATEGORY_CHOICES)
 
-    price = models.DecimalField(max_digits=8, decimal_places=2)
+    price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
     image = models.ImageField(upload_to="listings/", null=True, blank=True)
 
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
