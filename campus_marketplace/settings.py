@@ -147,7 +147,9 @@ CLOUDINARY_STORAGE = {
 
 # Tell WhiteNoise to ignore missing files globally
 # Use WhiteNoise for serving static files and Cloudinary for media files.
-# The STATICFILES_STORAGE is deprecated in favor of STORAGES since Django 4.2.
+# The STATICFILES_STORAGE setting is needed for compatibility with cloudinary_storage.
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+# The STORAGES setting is the modern way to configure file storage in Django 4.2+.
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
