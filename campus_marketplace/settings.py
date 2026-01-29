@@ -146,31 +146,18 @@ CLOUDINARY_STORAGE = {
 # campus_marketplace/settings.py
 
 # Tell WhiteNoise to ignore missing files globally
-# campus_marketplace/settings.py
-
-# Keep this False so it doesn't crash again
-# campus_marketplace/settings.py (at the very bottom)
-
-
-
-
-
-# Disable strict manifest checks
-
-
-# 1. Satisfy the Cloudinary library check (Required for deployment)
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-
-# 2. Tell WhiteNoise to ignore missing files globally
-WHITENOISE_MANIFEST_STRICT = False
-
-# 3. Define the Storages (Django 4.2+ and 5.2 standard)
+# Use WhiteNoise for serving static files and Cloudinary for media files.
+# The STATICFILES_STORAGE is deprecated in favor of STORAGES since Django 4.2.
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
+    # Use Django's ManifestStaticFilesStorage to avoid issues with whitenoise during collectstatic.
+    # The WhiteNoise middleware will still handle serving and on-the-fly compression.
     "staticfiles": {
-        # Using the standard WhiteNoise compression backend
-        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+        "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
     },
 }
+
+# This setting helps WhiteNoise not to fail when a file is missing in production.
+WHITENOISE_MANIFEST_STRICT = False
