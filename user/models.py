@@ -25,8 +25,20 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+# user/models.py
+
 @receiver(post_save, sender=User)
 def created_or_updated_user_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance)
-    instance.profile.save()
+        # Use get_or_create to be extra safe
+        Profile.objects.get_or_create(user=instance)
+    else:
+        # Only attempt to save if the profile already exists
+        if hasattr(instance, 'profile'):
+            instance.profile.save()
+        else:
+            # If it's an existing user without a profile (like your superuser), create it now
+            Profile.objects.create(user=instance)
+
+
+
