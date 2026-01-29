@@ -152,7 +152,9 @@ CLOUDINARY_STORAGE = {
 # campus_marketplace/settings.py (at the very bottom)
 
 # Satisfy the Cloudinary library check
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+WHITENOISE_MANIFEST_STRICT = False
+
+
 
 # Disable strict manifest checks
 
@@ -162,6 +164,7 @@ STORAGES = {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        # Use CompressedStaticFilesStorage instead of CompressedManifestStaticFilesStorage
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
