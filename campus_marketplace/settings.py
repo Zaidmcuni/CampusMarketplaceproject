@@ -151,20 +151,26 @@ CLOUDINARY_STORAGE = {
 # Keep this False so it doesn't crash again
 # campus_marketplace/settings.py (at the very bottom)
 
-# Satisfy the Cloudinary library check
-WHITENOISE_MANIFEST_STRICT = False
+
 
 
 
 # Disable strict manifest checks
 
 
+# 1. Satisfy the Cloudinary library check (Required for deployment)
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+# 2. Tell WhiteNoise to ignore missing files globally
+WHITENOISE_MANIFEST_STRICT = False
+
+# 3. Define the Storages (Django 4.2+ and 5.2 standard)
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
-        # Use CompressedStaticFilesStorage instead of CompressedManifestStaticFilesStorage
+        # Using the standard WhiteNoise compression backend
         "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
