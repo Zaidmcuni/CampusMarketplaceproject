@@ -1,0 +1,7 @@
+<h2>Message {{ receiver.username }}</h2>
+<form method="post">
+  {% csrf_token %}
+  <textarea name="content" rows="4" cols="40" placeholder="Type your message..."></textarea>
+  <br>
+  <button type="submit">Send</button>
+</form>

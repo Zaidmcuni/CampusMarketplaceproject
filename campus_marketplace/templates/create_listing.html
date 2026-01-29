@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 2rem auto; padding: 2.5rem; background: white; border-radius: 15px; box-shadow: var(--shadow-light);">
+    <h2 style="text-align: center; color: var(--mcgill-red); margin-bottom: 2rem;">➕ Sell an Item</h2>
+    
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Title</label>
+            <input type="text" name="title" required placeholder="e.g. Calculus Textbook, Winter Jacket"
+                   style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;">
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+            <div style="flex: 1;">
+                <label style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Price ($)</label>
+                <input type="number" name="price" step="0.01" placeholder="Leave blank for 'Contact me'"
+                       style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;">
+            </div>
+            
+            <div style="flex: 1;">
+                <label style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Category</label>
+                <select name="category" required 
+                        style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; background: white;">
+                    {% for value, label in category_choices %}
+                        <option value="{{ value }}">{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Description</label>
+            <textarea name="description" rows="5" placeholder="Describe the condition, size, or reason for selling..."
+                      style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; font-family: inherit;"></textarea>
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+            <div style="flex: 1;">
+                <label style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Pickup Location</label>
+                <select name="residence" required
+                        style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; background: white;">
+                    {% for value, label in residence_choices %}
+                        <option value="{{ value }}">{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div style="flex: 1;">
+                <label style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Upload Image</label>
+                <input type="file" name="image" accept="image/*"
+                       style="width: 100%; padding: 9px; border: 1px solid #ddd; border-radius: 8px; background: #f8f9fa;">
+            </div>
+        </div>
+
+        <button type="submit" class="btn" style="width: 100%; padding: 1rem; font-size: 1.1rem;">🚀 Post Listing</button>
+        
+        <div style="text-align: center; margin-top: 1rem;">
+            <a href="/" style="color: #666; font-size: 0.9rem;">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

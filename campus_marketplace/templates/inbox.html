@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 2rem auto;">
+    <h2 style="color: var(--mcgill-red); border-bottom: 2px solid #eee; padding-bottom: 1rem; margin-bottom: 1.5rem;">
+        💬 Your Inbox
+    </h2>
+
+    <div style="background: white; border-radius: 15px; box-shadow: var(--shadow-light); overflow: hidden;">
+        {% for chat in conversations %}
+            <a href="{% url 'chat_view' chat.partner.id %}" style="display: block; padding: 1.5rem; border-bottom: 1px solid #f0f0f0; transition: background 0.2s; text-decoration: none; color: inherit;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h3 style="margin: 0; font-size: 1.1rem; color: #2c3e50;">{{ chat.partner.username }}</h3>
+                        <p style="margin: 0.5rem 0 0; color: #666; font-size: 0.95rem;">
+                            {% if chat.last_message.sender == request.user %}
+                                <span style="color: #999;">You:</span>
+                            {% endif %}
+                            {{ chat.last_message.content|truncatechars:50 }}
+                        </p>
+                    </div>
+                    <span style="font-size: 0.8rem; color: #aaa;">{{ chat.last_message.created_at|date:"M d" }}</span>
+                </div>
+            </a>
+        {% empty %}
+            <div style="padding: 3rem; text-align: center; color: #666;">
+                <p>No messages yet.</p>
+                <a href="/" style="color: var(--mcgill-red); font-weight: bold;">Browse listings to start a chat!</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

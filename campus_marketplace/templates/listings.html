@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Listings</title>
+</head>
+<body>
+  <h1>All Listings</h1>
+
+  {% if listings %}
+    {% for listing in listings %}
+      <div style="margin-bottom: 16px; border-bottom: 1px solid #ccc; padding-bottom: 8px;">
+        <h3>
+          <a href="{% url 'listing_detail' listing.pk %}">
+            {{ listing.title }}
+          </a>
+        </h3>
+        <p>${{ listing.price }}</p>
+        <p>{{ listing.get_category_display }} • {{ listing.get_residence_display }}</p>
+        <p>Seller: {{ listing.seller.username }}</p>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No listings yet.</p>
+  {% endif %}
+</body>
+</html>

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="max-width: 500px; margin: 3rem auto; padding: 2rem; background: white; border-radius: 15px; box-shadow: var(--shadow-light);">
+    <h2 style="text-align: center; color: var(--mcgill-red); margin-bottom: 1.5rem;">Join the Marketplace</h2>
+    
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="django-form">
+            {{ form.as_p }}
+        </div>
+        
+        <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">📝 Create Account</button>
+    </form>
+    
+    <div style="text-align: center; margin-top: 1.5rem; border-top: 1px solid #eee; padding-top: 1rem;">
+        <p style="color: #666;">Already have an account?</p>
+        <a href="{% url 'login' %}" style="color: var(--mcgill-red); font-weight: bold; text-decoration: underline;">Log In here</a>
+    </div>
+</div>
+{% endblock %}

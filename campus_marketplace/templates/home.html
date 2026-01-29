@@ -1,0 +1,48 @@
+{% extends 'base.html' %}  
+
+{% block content %}
+    <div style="max-width: 600px; margin: 0 auto 3rem;">
+        <form action="{% url 'search_results' %}" method="GET">
+            <input type="text" name="q" placeholder="🔍 Search for textbooks..." 
+                   value="{{ request.GET.q }}"
+                   style="width: 100%; padding: 1rem 1.5rem; border: 2px solid #ddd; border-radius: 50px; outline: none;">
+        </form>
+    </div>
+
+    <h2 style="margin-bottom: 1.5rem; color: #333; border-bottom: 2px solid #eee; padding-bottom: 0.5rem;">Fresh Listings</h2>
+
+    <div class="listings-grid">
+        {% for listing in listings %}
+            <div class="listing-card">
+                <a href="{% url 'listing_detail' listing.id %}">
+                    {% if listing.image %}
+                        <img src="{{ listing.image.url }}" alt="{{ listing.title }}" class="listing-image">
+                    {% else %}
+                        <div class="listing-placeholder">📦</div>
+                    {% endif %}
+                    
+                    <div class="listing-info">
+                        <h3 style="margin: 0; color: #2c3e50;">{{ listing.title|truncatechars:25 }}</h3>
+                        
+                        {% if listing.price %}
+                            <div class="price">${{ listing.price }}</div>
+                        {% else %}
+                            <div class="price" style="font-size: 1.1rem; color: #999; font-style: italic;">Contact for Price</div>
+                        {% endif %}
+
+                        <p style="color: #6c757d; font-size: 0.9rem;">
+                            {{ listing.get_residence_display }}
+                        </p>
+                    </div>
+                </a>
+            </div>
+        {% empty %}
+            <div style="grid-column: 1/-1; text-align: center; padding: 3rem; background: white; border-radius: 10px;">
+                <h3>No listings yet! 😔</h3>
+                <p>Be the first to sell something.</p>
+                <br>
+                <a href="{% url 'create_listing' %}" class="btn">➕ Create Listing</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

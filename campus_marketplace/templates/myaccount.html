@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Account - Campus Marketplace</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background: #f8f9fa; }
+        .container { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h2 { color: #333; border-bottom: 3px solid #dc3545; padding-bottom: 10px; }
+        .avatar-section { text-align: center; margin-bottom: 30px; }
+        .avatar { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid #dc3545; }
+        .default-avatar { width: 120px; height: 120px; background: linear-gradient(135deg, #dc3545, #bb1f14); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: bold; margin: 0 auto 20px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; color: #333; }
+        input, select { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; }
+        input:focus, select:focus { outline: none; border-color: #dc3545; }
+        .btn { background: #dc3545; color: white; padding: 12px 30px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; margin: 10px 5px; text-decoration: none; display: inline-block; }
+        .btn:hover { background: #bb1f14; }
+        .nav { margin-bottom: 20px; }
+        .nav a { margin-right: 15px; color: #007bff; text-decoration: none; }
+        .alert { padding: 15px; margin: 20px 0; border-radius: 8px; }
+        .alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="/">🏠 Home</a>
+            <a href="/messages/inbox/">📬 Messages</a>
+            <a href="/user/myaccount/">👤 My Account</a>
+        </div>
+        
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <h2>👤 My Account</h2>
+        
+        <div class="avatar-section">
+            {% if avatar_url %}
+                <img src="{{ avatar_url }}" alt="Avatar" class="avatar">
+            {% else %}
+                <div class="default-avatar">{{ user.username|slice:":1"|upper }}</div>
+            {% endif %}
+            <p>{{ user.username }}</p>
+        </div>
+
+        <form method="post" action="/user/myaccount/update/" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label>First Name:</label>
+                <input type="text" name="first_name" value="{{ user.first_name }}">
+            </div>
+            
+            <div class="form-group">
+                <label>Last Name:</label>
+                <input type="text" name="last_name" value="{{ user.last_name }}">
+            </div>
+            
+            <div class="form-group">
+                <label>Residence:</label>
+                <select name="residence">
+                    <option value="">Select Residence</option>
+                    {% for value, label in RESIDENCE_CHOICES %}
+                        <option value="{{ value }}" {% if profile.residence == value %}selected{% endif %}>
+                            {{ label }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Profile Picture:</label>
+                <input type="file" name="avatar" accept="image/*">
+            </div>
+            
+            <button type="submit" class="btn">💾 Save Changes</button>
+            <a href="/" class="btn">← Back to Home</a>
+        </form>
+    </div>
+</body>
+</html>

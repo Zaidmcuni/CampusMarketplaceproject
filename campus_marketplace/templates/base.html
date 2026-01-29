@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Campus Marketplace{% endblock %}</title>
+    
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <h1><a href="{% url 'home' %}">🎓 Campus Marketplace</a></h1>
+            <p>McGill's Trusted Buy & Sell Platform</p>
+            
+            <nav style="margin-top: 1rem;">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'create_listing' %}" class="btn">➕ Sell Something</a>
+                    <a href="/messages/inbox/" class="btn">💬 Inbox</a>
+                    <a href="/user/myaccount/" class="btn">👤 My Account</a>
+                    
+                    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn" style="background: #444;">🚪 Logout</button>
+                    </form>
+                {% else %}
+                    <a href="/user/login/" class="btn">🔐 Login</a>
+                    <a href="/user/signup/" class="btn">📝 Sign Up</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 2rem 0;">
+        
+        {% if messages %}
+            <div class="alert-container">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+        
+    </main>
+
+    <footer style="text-align: center; padding: 2rem; color: #666; font-size: 0.9rem;">
+        <p>&copy; 2026 Campus Marketplace. Built for Students.</p>
+    </footer>
+
+</body>
+</html>

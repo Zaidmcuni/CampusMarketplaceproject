@@ -1,0 +1,149 @@
+/* static/css/style.css */
+
+/* --- GLOBAL THEME (McGill Red) --- */
+:root {
+    --mcgill-red: #DA291C;
+    --mcgill-red-dark: #bb1f14;
+    --mcgill-red-light: #ff5c4a;
+    --bg-light: #f8f9fa;
+    --bg-white: #ffffff;
+    --text-dark: #2c3e50;
+    --text-muted: #6c757d;
+    --shadow-light: 0 4px 12px rgba(0,0,0,0.08);
+    --shadow-hover: 0 12px 32px rgba(218,41,28,0.25);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { 
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+    background: linear-gradient(135deg, var(--bg-light) 0%, #e9ecef 100%); 
+    color: var(--text-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+a { text-decoration: none; color: inherit; }
+
+/* --- HEADER --- */
+.header { 
+    background: linear-gradient(135deg, var(--mcgill-red), var(--mcgill-red-dark)); 
+    color: white; 
+    padding: 1.5rem 0; 
+    text-align: center; 
+    box-shadow: var(--shadow-light);
+}
+.header h1 { font-size: 2.8rem; margin-bottom: 0.5rem; font-weight: 700; }
+.header p { font-size: 1.2rem; opacity: 0.95; }
+
+/* --- BUTTONS --- */
+.btn { 
+    background: linear-gradient(135deg, var(--mcgill-red), var(--mcgill-red-dark)); 
+    color: white; 
+    padding: 0.75rem 1.5rem; 
+    border: none; 
+    border-radius: 25px; 
+    font-weight: 500; 
+    cursor: pointer; 
+    transition: all 0.3s;
+    display: inline-block;
+    box-shadow: var(--shadow-light);
+}
+.btn:hover { 
+    background: linear-gradient(135deg, var(--mcgill-red-dark), #a11812); 
+    transform: translateY(-2px); 
+    box-shadow: var(--shadow-hover); 
+    color: white; 
+}
+
+/* --- ALERTS (Flash Messages) --- */
+.alert-container { margin-top: 1rem; }
+.alert {
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+.alert-success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+.alert-error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+.alert-warning { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+
+/* --- CARDS & GRID --- */
+.listings-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 2rem; 
+    margin: 2rem 0; 
+}
+.listing-card { 
+    background: var(--bg-white); 
+    border-radius: 20px; 
+    box-shadow: var(--shadow-light); 
+    overflow: hidden; 
+    transition: all 0.3s;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+.listing-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+
+.listing-image { width: 100%; height: 220px; object-fit: cover; }
+.listing-placeholder {
+    height: 220px; 
+    background: #e9ecef; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 3rem;
+}
+.listing-info { padding: 1.5rem; }
+.price { 
+    font-size: 1.5rem; 
+    font-weight: 700; 
+    color: var(--mcgill-red); 
+    margin: 0.5rem 0; 
+}
+
+/* --- DJANGO FORM STYLING --- */
+/* This makes the {{ form.as_p }} look professional */
+
+.django-form p {
+    margin-bottom: 1rem;
+}
+
+.django-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+}
+
+.django-form input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.django-form input:focus {
+    border-color: var(--mcgill-red);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(218, 41, 28, 0.1);
+}
+
+.django-form .helptext {
+    display: block;
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-top: 0.25rem;
+}
+
+.django-form ul.errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+    color: #dc3545;
+    font-size: 0.9rem;
+    font-weight: bold;
+}

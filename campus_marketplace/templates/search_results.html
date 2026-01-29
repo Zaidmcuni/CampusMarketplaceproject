@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container" style="margin-top: 2rem;">
+    <div style="margin-bottom: 2rem; border-bottom: 1px solid #eee; padding-bottom: 1rem;">
+        <h2 style="color: var(--text-dark);">
+            Search Results for "<span style="color: var(--mcgill-red);">{{ query }}</span>"
+        </h2>
+        <p style="color: #666;">Found {{ listings.count }} result(s)</p>
+    </div>
+
+    <div class="listings-grid">
+        {% for listing in listings %}
+            <div class="listing-card">
+                <a href="{% url 'listing_detail' listing.id %}">
+                    {% if listing.image %}
+                        <img src="{{ listing.image.url }}" alt="{{ listing.title }}" class="listing-image">
+                    {% else %}
+                        <div class="listing-placeholder">📦</div>
+                    {% endif %}
+                    
+                    <div class="listing-info">
+                        <h3 style="margin: 0; color: #2c3e50;">{{ listing.title|truncatechars:25 }}</h3>
+                        <div class="price">${{ listing.price }}</div>
+                        <p style="color: #6c757d; font-size: 0.9rem;">
+                            {{ listing.get_residence_display }}
+                        </p>
+                    </div>
+                </a>
+            </div>
+        {% empty %}
+            <div style="grid-column: 1/-1; text-align: center; padding: 4rem; background: white; border-radius: 15px;">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">🤔</div>
+                <h3>No matches found.</h3>
+                <p style="color: #666;">Try searching for "Textbook", "Monitor", or "Coat".</p>
+                <br>
+                <a href="/" class="btn" style="background: #6c757d;">← Clear Search</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
