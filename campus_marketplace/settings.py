@@ -44,7 +44,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware",  # Added for production static files
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -140,20 +140,23 @@ CLOUDINARY_STORAGE = {
 }
 
 # campus_marketplace/settings.py
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # campus_marketplace/settings.py
 
 # Tell WhiteNoise to ignore missing files globally
+# campus_marketplace/settings.py
+
+# Keep this False so it doesn't crash again
 WHITENOISE_MANIFEST_STRICT = False
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
-        # Use the base WhiteNoise storage instead of the 'Manifest' version
-        # This is the most reliable way to skip missing file checks
-        "BACKEND": "whitenoise.storage.StaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
