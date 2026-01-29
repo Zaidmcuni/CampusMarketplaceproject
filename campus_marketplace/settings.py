@@ -148,18 +148,17 @@ CLOUDINARY_STORAGE = {
 # campus_marketplace/settings.py
 
 # Keep this False so it doesn't crash again
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.StaticFilesStorage'
 
-# 2. Tell WhiteNoise not to panic (Safety net)
+# 2. Safety setting (technically ignored by the backend above, but good to keep)
 WHITENOISE_MANIFEST_STRICT = False
 
-# 3. Satisfy Django 5.x (Fixes deprecation warnings)
+# 3. Match the STORAGES dictionary exactly to the line above
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
-        # Matches the line above. Fixes MissingFileError because it's not "Manifest".
-        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+        "BACKEND": "whitenoise.storage.StaticFilesStorage",
     },
 }
