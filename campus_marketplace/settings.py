@@ -138,6 +138,7 @@ CLOUDINARY_STORAGE = {
 }
 
 # campus_marketplace/settings.py
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STORAGES = {
     "default": {
