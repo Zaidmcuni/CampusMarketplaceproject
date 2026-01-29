@@ -117,7 +117,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # This tells Django where your custom CSS (style.css) is actually located
 STATICFILES_DIRS = [
-    BASE_DIR / "campus_marketplace" / "static", # Point to the folder where style.css actually is
+    BASE_DIR / "static", 
 ]
 
 
@@ -164,7 +164,6 @@ STORAGES = {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
-        # Using StaticFilesStorage ensures style.css stays named style.css
         "BACKEND": "whitenoise.storage.StaticFilesStorage",
     },
 }
