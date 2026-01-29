@@ -30,7 +30,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'cloudinary_storage',
-    
     'django.contrib.staticfiles',
     'cloudinary',
     
@@ -118,7 +117,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static", # Location of your custom CSS
 ]
 
-WHITENOISE_MANIFEST_STRICT = False
+
 
 # Media files (User uploads)
 MEDIA_URL = '/media/'
@@ -143,11 +142,18 @@ CLOUDINARY_STORAGE = {
 # campus_marketplace/settings.py
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+# campus_marketplace/settings.py
+
+# Tell WhiteNoise to ignore missing files globally
+WHITENOISE_MANIFEST_STRICT = False
+
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        # Use the base WhiteNoise storage instead of the 'Manifest' version
+        # This is the most reliable way to skip missing file checks
+        "BACKEND": "whitenoise.storage.StaticFilesStorage",
     },
 }
