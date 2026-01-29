@@ -8,10 +8,10 @@ The site should be deployed and online, but if it is not, then my free subscript
 
 ---
 
- Residence-Based Filtering:** See items only from buildings near you.
- In-App Messaging:** Chat with sellers instantly without sharing your personal phone number.
- Secure Auth:** Complete Sign Up/Login system to ensure user accountability.
- Inventory Management:** Sellers can edit listings and mark items as "Sold" to stop inquiries.
- Search:** Quickly find textbooks, furniture, or tech by keyword.
+ Residence-Based Filtering: See items only from buildings near you.
+ In-App Messaging: Chat with sellers instantly without sharing your personal phone number.
+ Secure Auth: Complete Sign Up/Login system to ensure user accountability.
+ Inventory Management: Sellers can edit listings and mark items as "Sold" to stop inquiries.
+ Search: Quickly find textbooks, furniture, or tech by keyword.
 
 ---
