@@ -4,6 +4,8 @@
 
 I built this platform to solve the problem of disorganized buying and selling in student dorms. unlike broad platforms like Facebook Marketplace, this app filters items specifically by **Residence** (e.g., Carrefour, New Res, Citadelle), making pickups safer and easier.
 
+The site should be deployed and online, but if it is not, then my free subscription has ended : https://campusmarketplaceproject.onrender.com/
+
 ---
 
 ### ✨ Key Features
