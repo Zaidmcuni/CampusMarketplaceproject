@@ -15,7 +15,7 @@
             <h3 style="color: var(--text-dark); margin-bottom: 0.5rem;">{{ message.sender.username }}</h3>
             <p style="color: var(--text-muted); margin-bottom: 0.75rem;">{{ message.content|truncatewords:20 }}</p>
             <div style="color: var(--text-muted); font-size: 0.9rem;">{{ message.created_at|date:"M d, Y H:i" }}</div>
-            <a href="/messages/user/{{ message.sender.username }}/" class="btn" style="margin-top: 1rem;">💬 Chat</a>
+            <a href="{% url 'chat_view' message.sender.id %}" class="btn">💬 Chat</a>
         </div>
     {% empty %}
         <div style="grid-column: 1/-1; text-align: center; padding: 4rem;">No messages yet. <a href="/" class="btn">Browse listings</a></div>

@@ -35,7 +35,5 @@ class Listings(models.Model):
     ]
     residence = models.CharField(max_length=50, choices=RESIDENCE_CHOICES)
     is_sold = models.BooleanField(default=False)
-    price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
-
     def __str__(self):
         return self.title
