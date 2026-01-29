@@ -111,13 +111,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-
-# Use os.path.join for better compatibility with Render's Linux environment
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # This tells Django where your custom CSS (style.css) is actually located
 STATICFILES_DIRS = [
-    BASE_DIR / "static", 
+    BASE_DIR / 'static',
 ]
 
 
@@ -154,16 +152,16 @@ CLOUDINARY_STORAGE = {
 # campus_marketplace/settings.py (at the very bottom)
 
 # Satisfy the Cloudinary library check
-STATICFILES_STORAGE = 'whitenoise.storage.StaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # Disable strict manifest checks
-WHITENOISE_MANIFEST_STRICT = False
+
 
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.StaticFilesStorage",
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
