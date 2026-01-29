@@ -117,7 +117,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # This tells Django where your custom CSS (style.css) is actually located
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    BASE_DIR / "campus_marketplace" / "static", # Point to the folder where style.css actually is
 ]
 
 
